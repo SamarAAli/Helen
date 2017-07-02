@@ -6,11 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
@@ -30,9 +26,9 @@ public class BookDetailsAdapter extends ArrayAdapter<JSONObject> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.review_list_item, parent, false);
         }
         try {
-            review = reviewobj.getString("snippet");
-            reviewAuthor = reviewobj.getString("source");
-            reviewDate = reviewobj.getString("review_date");
+            review = reviewobj.getString("review");
+            reviewAuthor = reviewobj.getString("user");
+            reviewDate = reviewobj.getString("timestamp");
         } catch (JSONException e) {
             e.printStackTrace();
         }

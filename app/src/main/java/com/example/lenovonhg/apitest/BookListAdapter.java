@@ -31,10 +31,8 @@ public class BookListAdapter extends ArrayAdapter<JSONObject> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.book_item, parent, false);
         }
         try {
-            JSONObject volInfoObj = bookobj.getJSONObject("volumeInfo");
-            JSONObject imageLinks = volInfoObj.getJSONObject("imageLinks");
-            imageURL = imageLinks.getString("thumbnail");
-            title = volInfoObj.getString("title");
+            imageURL = bookobj.getString("image");
+            title = bookobj.getString("title");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -42,7 +40,6 @@ public class BookListAdapter extends ArrayAdapter<JSONObject> {
         booktitle = (TextView) convertView.findViewById(R.id.download_list_item_link);
         Picasso.with(getContext()).load(imageURL).into(poster);
         booktitle.setText(title);
-
         return convertView;
     }
 }

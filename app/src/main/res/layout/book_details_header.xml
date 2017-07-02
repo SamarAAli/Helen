@@ -96,12 +96,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/rating"
+            android:text="@string/goodreads_rating"
             android:textStyle="bold"
             android:textColor="@color/colorDarkGrey"
-            android:id="@+id/object_rating_title"
-            android:layout_alignLeft="@+id/object_rating"
-            android:layout_alignStart="@+id/object_rating"/>
+            android:id="@+id/goodreads_rating_title"
+            android:layout_alignLeft="@+id/goodreads_rating"
+            android:layout_alignStart="@+id/goodreads_rating"/>
 
         <RatingBar
             android:layout_width="wrap_content"
@@ -110,9 +110,33 @@
             android:numStars="10"
             android:stepSize="1"
             android:rating="0"
-            android:id="@+id/object_rating"
+            android:id="@+id/goodreads_rating"
             style="?android:attr/ratingBarStyleSmall"
-            android:layout_below="@+id/object_rating_title"
+            android:layout_below="@+id/goodreads_rating_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/user_ratings"
+            android:textStyle="bold"
+            android:textColor="@color/colorDarkGrey"
+            android:id="@+id/user_rating_title"
+            android:layout_below="@+id/goodreads_rating"
+            android:layout_alignLeft="@+id/user_ratings"
+            android:layout_alignStart="@+id/user_ratings"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="10"
+            android:stepSize="1"
+            android:rating="0"
+            android:id="@+id/user_ratings"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_below="@+id/user_rating_title"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
     </RelativeLayout>

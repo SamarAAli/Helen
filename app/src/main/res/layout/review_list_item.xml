@@ -9,25 +9,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorDarkGrey"
         android:textStyle="bold"
         android:id="@+id/review_list_item_author">
     </TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/colorDarkGrey"
         android:id="@+id/review_list_item_data">
     </TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorDarkGrey"
         android:id="@+id/review_release_date"
-        android:layout_below="@+id/review_list_item_data"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@+id/review_list_item_data" />
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"

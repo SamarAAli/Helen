@@ -61,7 +61,7 @@ public class BookListActivityFragment extends Fragment {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 alertDialog.dismiss();
-                getActivity().finish();
+                //getActivity().finish();
             }
         });
 
@@ -86,21 +86,13 @@ public class BookListActivityFragment extends Fragment {
     }
 
     private List<JSONObject> getBooksDataFromJson(String BooksDataString)throws JSONException {
-        final String _ITEMS = "items";
+        final String _INFO = "booksinfo";
         JSONObject booksJson = new JSONObject(BooksDataString);
-        JSONArray booksArray = booksJson.getJSONArray(_ITEMS);
-        String queryTitle = booksJson.getString("queryparam");
+        JSONArray booksArray = booksJson.getJSONArray(_INFO);
         List<JSONObject> resultStrs = new ArrayList<JSONObject>() ;
         for(int i = 0; i < booksArray.length(); i++)
         {
             JSONObject bookObj = booksArray.getJSONObject(i);
-            if (!queryTitle.equals("")) {
-                JSONObject volInfo =  bookObj.getJSONObject("volumeInfo");
-                String title = volInfo.getString("title").toLowerCase();
-                queryTitle.toLowerCase();
-                if (title.equals(queryTitle) && i != 0)
-                    continue;
-            }
             resultStrs.add(bookObj);
         }
         return resultStrs;

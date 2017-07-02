@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -38,38 +39,14 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
             EditText search_Title = (EditText) rootView.findViewById(R.id.search_title);
-            EditText search_Author = (EditText) rootView.findViewById(R.id.search_author);
             String search_title = "";
-            String search_author = "";
-
-                if(search_Title != null && search_Author != null)
-                {
-                    Context context = getActivity();
-                    search_title = search_Title.getText().toString();
-                    search_author = search_Author.getText().toString();
-                    if(isOnline(context)) {
-                        FetchBookTask fetchBookTask = new FetchBookTask();
-                        fetchBookTask.execute(search_title,search_author);
-                    }else
-                        showDialogMsg("Please check your internet connection!");
-                }
-                else if (search_Title != null)
+                if(search_Title != null)
                 {
                     Context context = getActivity();
                     search_title = search_Title.getText().toString();
                     if(isOnline(context)) {
                         FetchBookTask fetchBookTask = new FetchBookTask();
-                        fetchBookTask.execute(search_title,search_author);
-                    }else
-                        showDialogMsg("Please check your internet connection!");
-                }
-                else if (search_Author != null)
-                {
-                    Context context = getActivity();
-                    search_author = search_Author.getText().toString();
-                    if(isOnline(context)) {
-                        FetchBookTask fetchBookTask = new FetchBookTask();
-                        fetchBookTask.execute(search_title,search_author);
+                        fetchBookTask.execute(search_title);
                     }else
                         showDialogMsg("Please check your internet connection!");
                 }
@@ -95,7 +72,7 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 alertDialog.dismiss();
-                getActivity().finish();
+                //getActivity().finish();
             }
         });
 
@@ -104,28 +81,20 @@ public class MainActivityFragment extends Fragment {
     }
     public class FetchBookTask extends AsyncTask<String, Void, JSONObject>{
         private final String LOG_TAG = FetchBookTask.class.getSimpleName();
-        private JSONObject getBooksDataFromJson(String bookJsonStr,String queryparam) throws JSONException {
-            JSONObject booksJson = new JSONObject(bookJsonStr);
-            booksJson.put("queryparam",queryparam);
-            return  booksJson;
+        private JSONObject getBooksDataFromJson(String bookJsonStr) throws JSONException {
+            JSONArray booksJsonArray = new JSONArray(bookJsonStr);
+            JSONObject booksJsonObj = new JSONObject();
+            booksJsonObj.put("booksinfo",booksJsonArray);
+            return  booksJsonObj;
         }
         @Override
         protected JSONObject doInBackground(String... params) {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
             String BooksJsonStr = null;
-            String appkey = getString(R.string.api_key);
             try {
-                final String _BASE_URL = "https://www.googleapis.com/books/v1/volumes";
-                final String _QUERY_PARAM = params[0]+"+inauthor:"+params[1];
-                final String ID_PARAM = "key";
-
-                Uri builtUri = Uri.parse(_BASE_URL).buildUpon()
-                        .appendQueryParameter("q",_QUERY_PARAM)
-                        .appendQueryParameter("download","epub")
-                        .appendQueryParameter("printType","books")
-                        .appendQueryParameter(ID_PARAM, appkey)
-                        .build();
+                final String _BASE_URL = "http://127.0.0.1:8000/book/detail/"+params[0];
+                Uri builtUri = Uri.parse(_BASE_URL);
                 URL url = new URL(builtUri.toString());
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -150,8 +119,6 @@ public class MainActivityFragment extends Fragment {
                     return null;
                 }
                 BooksJsonStr = buffer.toString();
-                //BooksJsonStr = BooksJsonStr.substring(0,BooksJsonStr.length()-1)+paramObject.toString()+BooksJsonStr.charAt(BooksJsonStr.length()-1);
-                //Log.d(LOG_TAG,"bookJson: "+BooksJsonStr);
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Could not connect ", e);
                 showDialogMsg("Please check your internet connection!");
@@ -169,7 +136,7 @@ public class MainActivityFragment extends Fragment {
                 }
             }
             try{
-                return getBooksDataFromJson(BooksJsonStr,params[0]);
+                return getBooksDataFromJson(BooksJsonStr);
             } catch (JSONException e)
             {
                 Log.e(LOG_TAG,e.getMessage(),e);

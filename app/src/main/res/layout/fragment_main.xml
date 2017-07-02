@@ -21,22 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Book title"
+        android:text="Oliver Twist"
         android:ems="15"
         android:textAlignment="center"
         android:layout_below="@+id/retrieve_button"
         android:layout_centerHorizontal="true"
         android:id="@+id/search_title" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Book author"
-        android:ems="15"
-        android:textAlignment="center"
-        android:layout_below="@+id/search_title"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/search_author" />
 
 </RelativeLayout>

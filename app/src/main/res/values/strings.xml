@@ -4,8 +4,9 @@
     <string name="api_key">AIzaSyDfSEA_KVWDcCB6W70buawwTooOV4zHk7Y</string>
     <string name="reviews_key">b3c01a4a6cab31fbfba21d03bd530735cc5b7b45</string>
     <!-- Details Activity textviews-->
-    <string name="description">Overview</string>
-    <string name="rating">Rating</string>
-    <string name="listview_title">Reviews</string>
+    <string name="description">Book Description</string>
+    <string name="goodreads_rating">Rating by Goodreads</string>
+    <string name="user_ratings">Rating by Helen users</string>
+    <string name="listview_title">Book Reviews</string>
     <string name="download">Download</string>
 </resources>
