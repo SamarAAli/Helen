@@ -93,7 +93,7 @@ public class MainActivityFragment extends Fragment {
             BufferedReader reader = null;
             String BooksJsonStr = null;
             try {
-                final String _BASE_URL = "http://127.0.0.1:8000/book/detail/"+params[0];
+                final String _BASE_URL = "http://127.0.0.1:8000/book/detail/?book_title="+params[0];
                 Uri builtUri = Uri.parse(_BASE_URL);
                 URL url = new URL(builtUri.toString());
 

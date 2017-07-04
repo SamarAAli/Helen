@@ -11,8 +11,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 
@@ -66,10 +69,13 @@ public class BookDownload {
             int count;
             try {
                 URL url = new URL(f_url[0]);
-                URLConnection conection = url.openConnection();
-                conection.connect();
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                String referer = urlConnection.getHeaderField("referer");
+                urlConnection.setRequestProperty ("referer", referer);
+                urlConnection.connect();
                 // getting file length
-                int lenghtOfFile = conection.getContentLength();
+                int lenghtOfFile = urlConnection.getContentLength();
 
                 // input stream to read file - with 8k buffer
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
