@@ -77,8 +77,8 @@ public class BookDownload {
                 // getting file length
                 int lenghtOfFile = urlConnection.getContentLength();
 
-                // input stream to read file - with 8k buffer
-                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+                // input stream to read file - with 10M buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 10485760);
 
 
                 if (shouldAskPermissions()) {
@@ -93,7 +93,7 @@ public class BookDownload {
                     File newBook  = new File(dirPath,BOOK_TITLE+".pdf");
                     // Output stream to write file
                     OutputStream output = new FileOutputStream(newBook);
-                    byte data[] = new byte[10485760 ];
+                    byte data[] = new byte[10485760 ]; // 10MB array
 
                     long total = 0;
 
